@@ -19,7 +19,7 @@ class MyClient(discord.Client):
                 raise Exception('Status is not OK')
 
             future_contest_days = int(os.getenv('FUTURE_CONTESTS_DAYS'))
-            future_contests = [i for i in filter(lambda k: k['relativeTimeSeconds'] < 0 and k['relativeTimeSeconds'] > -future_contest_days * 24 * 60 * 60, contests_object['result'])]
+            future_contests = list(filter(lambda k: k['relativeTimeSeconds'] < 0 and k['relativeTimeSeconds'] > -future_contest_days * 24 * 60 * 60, contests_object['result']))
             future_contests.reverse()
 
             embed = discord.Embed(
