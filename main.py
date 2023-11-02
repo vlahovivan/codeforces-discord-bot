@@ -22,10 +22,15 @@ class MyClient(discord.Client):
             future_contests = list(filter(lambda k: k['relativeTimeSeconds'] < 0 and k['relativeTimeSeconds'] > -future_contest_days * 24 * 60 * 60, contests_object['result']))
             future_contests.reverse()
 
+            if len(future_contests) > 0:
+                description = f'Contests in the next {future_contest_days} days.'
+            else:
+                description = f'There are no contests in the next {future_contest_days} days.'
+
             embed = discord.Embed(
                 title='Upcoming Codeforces contests', 
                 colour=0xFF806E, 
-                description=f'Contests in the next {future_contest_days} days. See the whole list [here](https://codeforces.com/contests).'
+                description=f'{description} See the whole list [here](https://codeforces.com/contests).'
             )
 
             for contest in future_contests:
