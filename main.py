@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 import requests
 import json
 from datetime import datetime
+import pytz
 
 load_dotenv()
 
@@ -33,6 +34,8 @@ class MyClient(discord.Client):
                 description=f'{description} See the whole list [here](https://codeforces.com/contests).'
             )
 
+            zagreb_tz = pytz.timezone("Europe/Zagreb")
+
             for contest in future_contests:
                 contest_name = contest['name']
 
@@ -48,7 +51,7 @@ class MyClient(discord.Client):
 
                 npp_string = f"This contest {f'awards at max. {max_npp}' if is_rated else 'does not award'} NatPro Points."
 
-                date_and_time = datetime.fromtimestamp(contest['startTimeSeconds'])
+                date_and_time = datetime.fromtimestamp(contest['startTimeSeconds']).astimezone(zagreb_tz)
 
                 embed.set_thumbnail(url='https://i.imgur.com/zZPUFVw.png')
                 embed.add_field(name=contest_name, value=f"- {date_and_time.strftime('%B %d at %H:%M')}\n- {npp_string}", inline=False)
