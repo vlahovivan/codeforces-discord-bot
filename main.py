@@ -53,7 +53,7 @@ class MyClient(discord.Client):
                 embed.set_thumbnail(url='https://i.imgur.com/zZPUFVw.png')
                 embed.add_field(name=contest_name, value=f"- {date_and_time.strftime('%B %d at %H:%M')}\n- {npp_string}", inline=False)
 
-            await channel.send(content='<@&1030078340478017587>', embed=embed)
+            await channel.send(content=f'<@&{os.getenv("TAGGED_ROLE_ID")}>', embed=embed)
 
         except:
             print("Something went wrong...")
