@@ -34,6 +34,8 @@ class MyClient(discord.Client):
                 description=f'{description} See the whole list [here](https://codeforces.com/contests).\nCheck me out on [GitHub](https://github.com/vlahovivan/codeforces-discord-bot)!\n'
             )
 
+            embed.set_footer(text='Made by @vlahovivan.')
+
             zagreb_tz = pytz.timezone("Europe/Zagreb")
 
             for contest in future_contests:
@@ -55,8 +57,6 @@ class MyClient(discord.Client):
 
                 embed.set_thumbnail(url='https://i.imgur.com/zZPUFVw.png')
                 embed.add_field(name=contest_name, value=f"- {date_and_time.strftime('%B %d at %H:%M')}\n- {npp_string}", inline=False)
-
-                embed.set_footer(text='Made by @vlahovivan.')
 
             await channel.send(content=f'<@&{os.getenv("TAGGED_ROLE_ID")}>', embed=embed)
 
